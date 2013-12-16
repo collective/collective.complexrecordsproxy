@@ -2,7 +2,7 @@ Changelog
 =========
 
 0.1a1 Unreleased
---------------
+----------------
 
  - Initial release
    [sunew]
