@@ -13,7 +13,9 @@ class ComplexRecordsProxy(RecordsProxy):
         if IObject.providedBy(field):
             iface = field.schema
             collection = reg.collectionOfInterface(
-                           iface, check=False)
+                            iface,
+                            check=False,
+                            factory=ComplexRecordsProxy)
             if collection.has_key(name):
                 value = collection[name]
             else:
@@ -23,9 +25,10 @@ class ComplexRecordsProxy(RecordsProxy):
             iface = field.value_type.schema
             coll_prefix = iface.__identifier__ + '.' + name
             collection = reg.collectionOfInterface(
-                           iface,
-                           check=False,
-                           prefix=coll_prefix)
+                            iface,
+                            check=False,
+                            prefix=coll_prefix,
+                            factory=ComplexRecordsProxy)
             value = collection.values()
             if not value:
                 value = _marker
@@ -42,7 +45,9 @@ class ComplexRecordsProxy(RecordsProxy):
             if IObject.providedBy(field):
                 iface = field.schema
                 collection = reg.collectionOfInterface(
-                               iface)
+                                iface,
+                                check=False,
+                                factory=ComplexRecordsProxy)
                 collection[name] = value
             elif ICollection.providedBy(field) and \
                     IObject.providedBy(field.value_type):
@@ -51,8 +56,10 @@ class ComplexRecordsProxy(RecordsProxy):
                 # the coll_prefix prefix:
                 coll_prefix = iface.__identifier__ + '.' + name
                 collection = reg.collectionOfInterface(
-                               iface,
-                               prefix=coll_prefix)
+                                iface,
+                                check=False,
+                                prefix=coll_prefix,
+                                factory=ComplexRecordsProxy)
                 # Clear collection before adding/updating in case of deletes.
                 collection.clear()
                 for idx, val in enumerate(value):
