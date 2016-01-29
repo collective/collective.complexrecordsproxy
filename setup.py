@@ -6,7 +6,7 @@ def read(*pathnames):
     return open(os.path.join(os.path.dirname(__file__), *pathnames)).read().\
            decode('utf-8')
 
-version = '0.1a1'
+version = '1.0'
 
 setup(name='collective.complexrecordsproxy',
       version=version,

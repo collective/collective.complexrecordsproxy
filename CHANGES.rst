@@ -1,8 +1,8 @@
 Changelog
 =========
 
-0.1a1 (Unreleased)
-------------------
+1.0 (2016-01-29)
+----------------
 
  - Initial release
    [sunew, tomgross]
