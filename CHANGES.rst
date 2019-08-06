@@ -4,7 +4,8 @@ Changelog
 1.1 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Python 3 compatibility in setup.py.
+  [karalics]
 
 
 1.0 (2016-01-29)

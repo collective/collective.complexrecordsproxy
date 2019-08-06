@@ -2,19 +2,18 @@ import os
 from setuptools import setup, find_packages
 
 
-def read(*pathnames):
-    return open(os.path.join(os.path.dirname(__file__), *pathnames)).read().\
-           decode('utf-8')
+long_description = (
+    open('README.rst').read()
+    + '\n' +
+    open('CHANGES.rst').read()
+    + '\n')
 
 version = '1.1.dev0'
 
 setup(name='collective.complexrecordsproxy',
       version=version,
       description="Providing a proxy class for plone.registry allowing IObject fields to be stored as separate records using the plone.registry collection support.",
-      long_description='\n'.join([
-          read('README.rst'),
-          read('CHANGES.rst'),
-          ]),
+      long_description=long_description,
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         "Framework :: Plone",
