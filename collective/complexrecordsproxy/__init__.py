@@ -1,1 +1,1 @@
-from complexrecordsproxy import ComplexRecordsProxy
+from collective.complexrecordsproxy.complexrecordsproxy import ComplexRecordsProxy
