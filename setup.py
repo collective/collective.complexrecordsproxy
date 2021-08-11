@@ -3,8 +3,7 @@ from setuptools import setup, find_packages
 
 
 def read(*pathnames):
-    return open(os.path.join(os.path.dirname(__file__), *pathnames)).read().\
-           decode('utf-8')
+    return open(os.path.join(os.path.dirname(__file__), *pathnames)).read()
 
 version = '1.1.dev0'
 
@@ -20,9 +19,14 @@ setup(name='collective.complexrecordsproxy',
         "Framework :: Plone",
         "Framework :: Plone :: 4.3",
         "Framework :: Plone :: 5.0",
+        "Framework :: Plone :: 5.1",
+        "Framework :: Plone :: 5.2",
         "Framework :: Zope2",
         "Programming Language :: Python",
+        "Programming Language :: Python3",
         "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
         ],
       keywords='configuration registry',
       author='Sune Broendum Woeller',
