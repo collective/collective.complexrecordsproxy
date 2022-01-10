@@ -4,8 +4,8 @@ Changelog
 1.1 (unreleased)
 ----------------
 
-- Add Python 3 & Plone 5.2 compatibility
-  [boulch]
+- Add Python 3 & Plone 5.2 / 6.0 compatibility
+  [boulch, laulaz]
 
 
 1.0 (2016-01-29)
