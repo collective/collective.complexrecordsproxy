@@ -3,8 +3,11 @@ from setuptools import setup, find_packages
 
 
 def read(*pathnames):
-    return open(os.path.join(os.path.dirname(__file__), *pathnames), "rb").read().\
-           decode('utf-8')
+    return (
+        open(os.path.join(os.path.dirname(__file__), *pathnames), "rb")
+        .read()
+        .decode("utf-8")
+    )
 
 
 version = "1.1.dev0"
