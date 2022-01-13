@@ -10,7 +10,7 @@ def read(*pathnames):
     )
 
 
-version = "1.1.dev0"
+version = "1.1"
 
 setup(
     name="collective.complexrecordsproxy",

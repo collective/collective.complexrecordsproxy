@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.1 (unreleased)
+1.1 (2022-01-13)
 ----------------
 
 - Add Python 3 & Plone 5.2 / 6.0 compatibility
