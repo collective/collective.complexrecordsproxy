@@ -1,23 +1,124 @@
 # collective.complexrecordsproxy
 
+[![Tests](https://github.com/collective/collective.complexrecordsproxy/actions/workflows/test-matrix.yml/badge.svg)](https://github.com/collective/collective.complexrecordsproxy/actions/workflows/test-matrix.yml)
+[![Meta](https://github.com/collective/collective.complexrecordsproxy/actions/workflows/meta.yml/badge.svg)](https://github.com/collective/collective.complexrecordsproxy/actions/workflows/meta.yml)
+
 Providing a proxy class for plone.registry allowing IObject fields to be stored as separate records using the plone.registry collection support.
+
 
 ## Motivation
 
-With z3c.form it is possible to create forms allowing users to create and edit lists of complex records.
+With z3c.form it is possible to create forms allowing users to create and edit lists of complex records: a settings schema with an `Object` field, or a `Tuple` / `List` of `Object` fields.
 
-An example:
-
-TODO from here.
-
-We have a main interface with an object field etc.
-
-We build a hierarchic structure composed of native types.
-All boils down to simple native types in the end, and so in theory is possible to store in the registry without violating this principle of plone.registry:
+plone.registry can't store these fields as records. Its documentation explains why:
 
 > To avoid potentially
 > breaking the registry with persistent references to symbols that may go away,
 > we purposefully limit the number of fields supported.
 
+But a complex record boils down to simple native types in the end. `ComplexRecordsProxy` stores each field of each complex record as a separate registry record, with the collection support of plone.registry, so the registry only holds native types.
+
 
 ## Usage
+
+Register the simple fields of the schema as records, omitting the complex ones, and read the settings through `ComplexRecordsProxy`:
+
+```python
+from collective.complexrecordsproxy import ComplexRecordsProxy
+from plone.registry.interfaces import IRegistry
+from zope import schema
+from zope.component import getUtility
+from zope.interface import Interface
+
+
+class IAddress(Interface):
+    street = schema.TextLine(title="Street")
+    city = schema.TextLine(title="City", required=False)
+
+
+class ISettings(Interface):
+    title = schema.TextLine(title="Title", required=False)
+    address = schema.Object(title="Address", schema=IAddress, required=False)
+    addresses = schema.Tuple(
+        title="Addresses",
+        value_type=schema.Object(schema=IAddress),
+        required=False,
+        missing_value=(),
+    )
+
+
+registry = getUtility(IRegistry)
+registry.registerInterface(ISettings, omit=("address", "addresses"))
+settings = registry.forInterface(
+    ISettings, omit=("address", "addresses"), factory=ComplexRecordsProxy
+)
+settings.addresses = (address1, address2)  # objects providing IAddress
+[address.street for address in settings.addresses]
+```
+
+- An `Object` field `address` is stored under `<IAddress identifier>/address.<field name>`.
+- A `Tuple` or `List` of `Object` field `addresses` is stored under `<IAddress identifier>.addresses/r0.<field name>`, `r1`, etc. Setting the field replaces all its items.
+- Reading a complex field returns `ComplexRecordsProxy` objects, not the objects that were set. A `Tuple` or `List` field returns them in a mapping values view: iterate over it, it can't be indexed. A complex field without records returns the `missing_value` of the field.
+
+collective.autopublishing uses it for its control panel settings.
+
+
+## Compatibility
+
+Version 2.x supports Plone 6.1 and 6.2, on Python 3.10 to 3.13.
+
+For Plone 4.3 to 6.0 and Python 2.7, use collective.complexrecordsproxy 1.1.
+
+
+## Installation
+
+Add `collective.complexrecordsproxy` to the dependencies of your package. It is a library, not an add-on: there is no ZCML to load and nothing to activate.
+
+
+## Development
+
+Requires [uv](https://docs.astral.sh/uv/). This installs the package with Plone 6.2.3 in `.venv` (use `PLONE_VERSION=6.1.6 make install` for another version) and the prek git hook. Plone is not a dependency of the package: the Makefile adds Products.CMFPlone and plone.app.contenttypes for the development instance.
+
+```shell
+make install
+make start          # Plone on http://localhost:8080 (admin / admin)
+make console        # Python console with the Zope application as `app`
+```
+
+### Tests
+
+Tests run through tox, as the CI does:
+
+```shell
+make test                                   # Plone 6.2.3
+uvx --with tox-uv tox -e py312-plone61      # one Plone / Python combination
+make test-all                               # lint, every combination, dependencies
+```
+
+Without tox:
+
+```shell
+.venv/bin/zope-testrunner --test-path=src -s collective.complexrecordsproxy
+```
+
+### Lint
+
+```shell
+make check          # format then lint (pyupgrade, isort, black, flake8...)
+```
+
+`.editorconfig`, `.flake8`, `.gitignore`, `.pre-commit-config.yaml`, `tox.ini`,
+`.github/` and the tool sections of `pyproject.toml` are generated by
+[plone.meta](https://github.com/plone/meta): change `.meta.toml`, then run
+`uvx --from plone.meta config-package --no-commit --branch current .`.
+
+
+## Contribute
+
+- Issue Tracker: https://github.com/collective/collective.complexrecordsproxy/issues
+- Source Code: https://github.com/collective/collective.complexrecordsproxy
+
+
+## License
+
+The project is licensed under the GPLv2 or later.
