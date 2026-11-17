@@ -4,7 +4,53 @@
 [build-system]
 requires = ["setuptools>=68.2,<83", "wheel"]
 
+# START-MARKER-MANUAL-CONFIG
+# Anything from here until END-MARKER-MANUAL-CONFIG
+# will be kept by plone.meta
 
+[project]
+name = "collective.complexrecordsproxy"
+version = "2.0.0.dev0"
+description = "Providing a proxy class for plone.registry allowing IObject fields to be stored as separate records using the plone.registry collection support."
+classifiers = [
+    "Framework :: Plone",
+    "Framework :: Plone :: 6.1",
+    "Framework :: Plone :: 6.2",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+license = "GPL-2.0-or-later"
+dynamic = ["readme"]
+requires-python = ">=3.10"
+authors = [
+    {name = "Sune Broendum Woeller",email = "sune@woeller.dk"},
+]
+dependencies = [
+    "plone.registry",
+    "zope.schema",
+]
+keywords = ["plone", "configuration", "registry"]
+
+[project.optional-dependencies]
+test = [
+    "zest.releaser[recommended]",
+    "zestreleaser.towncrier",
+    "zope.testrunner",
+]
+
+[project.urls]
+PyPI = "https://pypi.org/project/collective.complexrecordsproxy"
+Source = "https://github.com/collective/collective.complexrecordsproxy"
+Issues = "https://github.com/collective/collective.complexrecordsproxy/issues"
+Changelog = "https://github.com/collective/collective.complexrecordsproxy/blob/master/CHANGES.md"
+
+[tool.setuptools.dynamic]
+readme = {file = ["README.md", "CONTRIBUTORS.md", "CHANGES.md"], content-type = "text/markdown"}
+# END-MARKER-MANUAL-CONFIG
 
 [tool.towncrier]
 directory = "news/"
