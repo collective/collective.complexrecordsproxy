@@ -1,5 +1,6 @@
-from zope.schema.interfaces import IObject, ICollection
 from plone.registry.recordsproxy import RecordsProxy
+from zope.schema.interfaces import ICollection
+from zope.schema.interfaces import IObject
 
 _marker = object()
 
