@@ -13,9 +13,12 @@ name = "collective.complexrecordsproxy"
 version = "2.0.0.dev0"
 description = "Providing a proxy class for plone.registry allowing IObject fields to be stored as separate records using the plone.registry collection support."
 classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Web Environment",
     "Framework :: Plone",
     "Framework :: Plone :: 6.1",
     "Framework :: Plone :: 6.2",
+    "Operating System :: OS Independent",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: 3.10",

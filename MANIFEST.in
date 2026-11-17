@@ -1,5 +1,9 @@
-include *.md LICENSE.GPL
-recursive-include src *.py
-global-exclude *pyc
-global-exclude .project
-global-exclude .pydevproject
+graft src/collective
+graft news
+include *.md
+include LICENSE.GPL
+exclude Makefile
+exclude mx.ini
+exclude instance.yaml
+global-exclude *.pyc
+global-exclude .DS_Store
