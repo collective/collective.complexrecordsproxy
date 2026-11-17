@@ -112,6 +112,12 @@ make check          # format then lint (pyupgrade, isort, black, flake8...)
 [plone.meta](https://github.com/plone/meta): change `.meta.toml`, then run
 `uvx --from plone.meta config-package --no-commit --branch current .`.
 
+### Release
+
+```shell
+make release        # zest.releaser fullrelease, run through uvx
+```
+
 
 ## Contribute
 

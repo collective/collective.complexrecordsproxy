@@ -40,8 +40,6 @@ keywords = ["plone", "configuration", "registry"]
 
 [project.optional-dependencies]
 test = [
-    "zest.releaser[recommended]",
-    "zestreleaser.towncrier",
     "zope.component",
     "zope.interface",
     "zope.testrunner",
@@ -175,7 +173,7 @@ Zope = [
 ]
 python-dateutil = ['dateutil']
 pytest-plone = ['pytest', 'zope.pytestlayer', 'plone.testing', 'plone.app.testing']
-ignore-packages = ['zestreleaser.towncrier', 'zest.releaser', 'zope.testrunner']
+ignore-packages = ['zope.testrunner']
 
 ##
 # Add extra configuration options in .meta.toml:

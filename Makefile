@@ -134,3 +134,9 @@ test-coverage: ## Run tests with coverage
 .PHONY: test-all
 test-all: ## Run lint, all supported Python / Plone versions and dependency checks
 	@$(TOX)
+
+# Release
+.PHONY: release
+release: ## Run full release with uvx zest.releaser
+	@echo "$(GREEN)==> Release$(RESET)"
+	@uvx --from 'zest.releaser[recommended]' --with zestreleaser.towncrier fullrelease
