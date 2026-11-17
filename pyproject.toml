@@ -42,6 +42,8 @@ keywords = ["plone", "configuration", "registry"]
 test = [
     "zest.releaser[recommended]",
     "zestreleaser.towncrier",
+    "zope.component",
+    "zope.interface",
     "zope.testrunner",
 ]
 
