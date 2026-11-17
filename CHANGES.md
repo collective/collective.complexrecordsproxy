@@ -1,5 +1,7 @@
 # Changelog
 
+<!-- towncrier release notes start -->
+
 ## 1.2 (unreleased)
 
 - Nothing changed yet.
