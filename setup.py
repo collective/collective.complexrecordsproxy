@@ -18,10 +18,12 @@ setup(
     description="Providing a proxy class for plone.registry allowing IObject fields to be stored as separate records using the plone.registry collection support.",
     long_description="\n".join(
         [
-            read("README.rst"),
-            read("CHANGES.rst"),
+            read("README.md"),
+            read("CONTRIBUTORS.md"),
+            read("CHANGES.md"),
         ]
     ),
+    long_description_content_type="text/markdown",
     # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
         "Framework :: Plone",

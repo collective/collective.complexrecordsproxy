@@ -1,6 +1,5 @@
-include *.txt *.rst
+include *.md LICENSE.GPL
 recursive-include collective *
-recursive-include docs *
 global-exclude *pyc
 global-exclude .project
 global-exclude .pydevproject
