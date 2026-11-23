@@ -10,7 +10,7 @@ requires = ["setuptools>=68.2,<83", "wheel"]
 
 [project]
 name = "collective.complexrecordsproxy"
-version = "2.0.0.dev0"
+version = "2.0.0"
 description = "Providing a proxy class for plone.registry allowing IObject fields to be stored as separate records using the plone.registry collection support."
 classifiers = [
     "Development Status :: 5 - Production/Stable",
